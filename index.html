@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog Clock with Digital Display</title>
+    <style>
+        body {
+            background: linear-gradient(to left, orange, white);
+            display: flex;
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .clock {
+            position: relative;
+            height: 20vw; 
+            width: 20vw; 
+            margin: auto;
+            border-radius: 50%;
+            background: linear-gradient(to right, skyblue, gray);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
+        }
+
+        #hour, #minutes, #seconds {
+            position: absolute;
+            background-color: black;
+            border-radius: 10px;
+            transform-origin: bottom;
+        }
+
+        #hour {
+            width: 1.8%;
+            height: 25%;
+            top: 25%;
+            left: 48.85%;
+            opacity: 0.9;
+        }
+
+        #minutes {
+            width: 1.6%;
+            height: 30%;
+            top: 19%;
+            left: 49.15%;
+            opacity: 0.9;
+        }
+
+        #seconds {
+            width: 1%;
+            height: 40%;
+            top: 9%;
+            left: 49.85%;
+            opacity: 0.9;
+            background-color: ; 
+        }
+
+        .digital-clock {
+            text-align: center;
+            margin-top: 1cm; 
+            font-size: 24px;
+            color: black;
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 5px; 
+            background-color: white; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div id="hour"></div>
+        <div id="minutes"></div>
+        <div id="seconds"></div>
+    </div>
+    <div class="digital-clock" id="digital"></div> 
+
+    <script>
+        function updateClock() {
+            const d = new Date();
+            const h = d.getHours();
+            const m = d.getMinutes();
+            const s = d.getSeconds();
+
+           
+            const formattedHours = String(h).padStart(2, '0');
+            const formattedMinutes = String(m).padStart(2, '0');
+            const formattedSeconds = String(s).padStart(2, '0');
+
+            
+            const hrotation = 30 * h + m / 2; 
+            const mrotation = 6 * m; 
+            const srotation = 6 * s; 
+
+      
+            document.getElementById('hour').style.transform = `rotate(${hrotation}deg)`;
+            document.getElementById('minutes').style.transform = `rotate(${mrotation}deg)`;
+            document.getElementById('seconds').style.transform = `rotate(${srotation}deg)`;
+
+        
+            document.getElementById('digital').innerText = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+        }
+
+        
+        setInterval(updateClock, 1000);
+        
+        updateClock();
+    </script>
+</body>
+</html>
